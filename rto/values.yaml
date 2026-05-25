@@ -65,18 +65,19 @@ env:
 ingress:
   enabled: true
   className: nginx
-  annotations: {}
+  annotations: 
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: ""
+    - host: rto.botgo.io
       paths:
         - path: /
           pathType: Prefix
-  tls: []
-    # - secretName: chart-example-tls
-    #   hosts:
-    #     - chart-example.local
+  tls: 
+    - secretName: rto-tls
+      hosts:
+        - rto.botgo.io
 
 # -- Expose the service via gateway-api HTTPRoute
 # Requires Gateway API resources and suitable controller installed within the cluster
