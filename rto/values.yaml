@@ -1,4 +1,4 @@
-# Default values for maturity-app.
+# Default values for rto.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,9 +7,9 @@ replicaCount: 2
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: priyabratakhandual/maturity-app
+  repository: priyabratakhandual/rto-student-registration
   # This sets the pull policy for images.
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1"
 
@@ -53,25 +53,26 @@ securityContext: {}
 service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: ClusterIP
-
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
-  port: 7000
-  targetPort: 7000
+  port: 5008
 
-containerPort: 7000
+containerPort: 5008
+
+env:
+  GROQ_API_KEY: ""
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
-  enabled: true
-  className: nginx
+  enabled: false
+  className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: ""
+    - host: chart-example.local
       paths:
         - path: /
-          pathType: Prefix
+          pathType: ImplementationSpecific
   tls: []
     # - secretName: chart-example-tls
     #   hosts:
@@ -130,14 +131,14 @@ resources: {}
 # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 livenessProbe:
   httpGet:
-    path: /maturity-assessments/assessment
-    port: 7000
-  initialDelaySeconds: 30
+    path: /ping
+    port: 5008
+  initialDelaySeconds: 15
   periodSeconds: 10
 readinessProbe:
   httpGet:
-    path: /maturity-assessments/assessment
-    port: 7000
+    path: /ping
+    port: 5008
   initialDelaySeconds: 10
   periodSeconds: 5
 

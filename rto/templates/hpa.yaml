@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "maturity-app.fullname" . }}
+  name: {{ include "rto.fullname" . }}
   labels:
-    {{- include "maturity-app.labels" . | nindent 4 }}
+    {{- include "rto.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "maturity-app.fullname" . }}
+    name: {{ include "rto.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
