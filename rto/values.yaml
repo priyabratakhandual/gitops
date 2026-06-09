@@ -38,7 +38,7 @@ ingress:
   hosts:
     - host: ""
       paths:
-        - path: /rto
+        - path: /
           pathType: Prefix
 
   tls: []
