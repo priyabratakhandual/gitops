@@ -31,8 +31,17 @@ service:
 secretName: rto-secret
 
 ingress:
-  enabled: false
+  enabled: true
+  className: nginx
+  annotations: {}
 
+  hosts:
+    - host: ""
+      paths:
+        - path: /rto
+          pathType: Prefix
+
+  tls: []
 httpRoute:
   enabled: false
   annotations: {}
