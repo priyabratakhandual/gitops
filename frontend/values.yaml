@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: priyabratakhandual/dealer-frontend
   pullPolicy: Always
-  tag: "latest"
+  tag: "6"
 
 imagePullSecrets: []
 
