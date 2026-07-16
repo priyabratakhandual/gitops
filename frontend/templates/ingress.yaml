@@ -1,0 +1,12 @@
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /app
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "frontend.fullname" . }}
+                port:
+                  number: {{ .Values.service.port }}

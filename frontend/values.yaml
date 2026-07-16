@@ -1,0 +1,57 @@
+replicaCount: 1
+
+image:
+  repository: priyabratakhandual/dealer-frontend
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+
+  annotations: {}
+
+  hosts:
+    - host: frontend.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+  tls: []
+
+resources: {}
+
+autoscaling:
+  enabled: false
+
+volumes: []
+
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
